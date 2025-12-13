@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.rss</groupId>
+  <artifactId>RSS-MM</artifactId>
+  <version>1.0</version>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.5.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer>
+                  <mainClass>com.rss.mm.App</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.panteleyev</groupId>
+        <artifactId>jpackage-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <configuration>
+          <input>${project.build.directory}</input>
+          <mainJar>RSS-MM-1.0.jar</mainJar>
+          <name>RSS-MM</name>
+          <appVersion>1.0</appVersion>
+          <vendor>RSS</vendor>
+          <copyright>Copyright © 2025</copyright>
+          <type>EXE</type>
+          <icon>src/main/java/com/rss/mm/resources/icon.ico</icon>
+          <destination>${project.build.directory}/jpackage</destination>
+          <arguments>
+            <argument>--win-console</argument>
+            <argument>--win-dir-chooser</argument>
+            <argument>--win-menu</argument>
+            <argument>--win-shortcut</argument>
+            <argument>--install-dir</argument>
+            <argument>C:\Program Files\RSS-MM</argument>
+          </arguments>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <properties>
+    <maven.compiler.target>21</maven.compiler.target>
+    <exec.mainClass>com.rss.mm.App</exec.mainClass>
+    <mainClass>com.rss.mm.App</mainClass>
+    <maven.compiler.source>21</maven.compiler.source>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+</project>
