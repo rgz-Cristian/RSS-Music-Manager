@@ -152,6 +152,22 @@ public class DatabaseManager {
 
         return songs;
     }
+    
+    public static boolean existsByTitleAndArtist(String title, String artist) throws SQLException {
+       String sql = "SELECT 1 FROM songs WHERE LOWER(title) = LOWER(?) AND LOWER(artist) = LOWER(?) LIMIT 1";
+
+       try (Connection conn = getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+           stmt.setString(1, title.trim());
+           stmt.setString(2, artist.trim());
+
+           try (ResultSet rs = stmt.executeQuery()) {
+               return rs.next();   // si hay fila, ya existe
+           }
+       }
+   }
+    
     public static List<Song> findSongs(String findText) throws SQLException {
         List<Song> songs = new ArrayList<>();
         String sql = "SELECT id, title, artist, votes FROM songs WHERE title = ? ORDER BY DESC";
@@ -197,4 +213,6 @@ public class DatabaseManager {
             throw e;
         }
     }
+
+
 }

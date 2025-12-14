@@ -127,5 +127,9 @@ public class Operations {
         // Convertimos el índice al ranking (posición)
         return index + 1;
     }
+
+    public boolean existsByTitleAndArtist(String songName, String artistName) throws SQLException {
+        return DatabaseManager.existsByTitleAndArtist(artistName, artistName);
+    }
     
 }
